@@ -20,19 +20,6 @@ import { useCatch } from '../reactHelper';
 import Loader from '../common/components/Loader';
 
 const useStyles = makeStyles((theme) => ({
-  options: {
-    position: 'fixed',
-    top: theme.spacing(2),
-    right: theme.spacing(2),
-    display: 'flex',
-    flexDirection: 'row',
-    gap: theme.spacing(1),
-  },
-  container: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: theme.spacing(2),
-  },
   extraContainer: {
     display: 'flex',
     flexDirection: 'row',
@@ -149,7 +136,7 @@ const LoginPage = () => {
 
   return (
     <LoginLayout>
-      <div className={classes.options}>
+      <div className="fixed top-2 right-2 flex flex-row gap-1">
         {nativeEnvironment && changeEnabled && (
           <Tooltip title={t('settingsServer')}>
             <IconButton onClick={() => navigate('/change-server')}>
@@ -172,9 +159,9 @@ const LoginPage = () => {
           </FormControl>
         )}
       </div>
-      <div className={classes.container}>
+      <div className="flex flex-col gap-4 text-gray-300 text-sm font-semibold mb-2">
         {useMediaQuery(theme.breakpoints.down('lg')) && <LogoImage color={theme.palette.primary.main} />}
-        <TextField
+        <input
           required
           error={failed}
           label={t('userEmail')}
@@ -184,8 +171,10 @@ const LoginPage = () => {
           autoFocus={!email}
           onChange={(e) => setEmail(e.target.value)}
           helperText={failed && 'Invalid username or password'}
+          placeholder="seuemail@exemplo.com"
+          className="w-full px-4 py-2 bg-zinc-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-400"
         />
-        <TextField
+        <input
           required
           error={failed}
           label={t('userPassword')}
@@ -195,6 +184,8 @@ const LoginPage = () => {
           autoComplete="current-password"
           autoFocus={!!email}
           onChange={(e) => setPassword(e.target.value)}
+          placeholder="********"
+          className="w-full px-4 py-2 bg-zinc-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-400"
         />
         {codeEnabled && (
           <TextField
@@ -207,15 +198,14 @@ const LoginPage = () => {
             onChange={(e) => setCode(e.target.value)}
           />
         )}
-        <Button
+        <button
           onClick={handlePasswordLogin}
           type="submit"
-          variant="contained"
-          color="secondary"
+          className="w-full bg-gradient-to-r from-blue-600 to-blue-400 text-white font-bold py-3 rounded-lg hover:from-blue-700 hover:to-blue-500 transition-all"
           disabled={!email || !password || (codeEnabled && !code)}
         >
           {t('loginLogin')}
-        </Button>
+        </button>
         {openIdEnabled && (
           <Button
             onClick={() => handleOpenIdLogin()}
@@ -237,14 +227,15 @@ const LoginPage = () => {
             </Link>
           )}
           {emailEnabled && (
-            <Link
+            <button
               onClick={() => navigate('/reset-password')}
-              className={classes.link}
               underline="none"
               variant="caption"
+              className="text-gray-400 text-center cursor-pointer hover:text-blue-300"
+
             >
               {t('loginReset')}
-            </Link>
+            </button>
           )}
         </div>
       </div>

@@ -1,60 +1,29 @@
 import React from 'react';
 import { useMediaQuery, Paper } from '@mui/material';
-import makeStyles from '@mui/styles/makeStyles';
 import { useTheme } from '@mui/material/styles';
 import LogoImage from './LogoImage';
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-    height: '100%',
-  },
-  sidebar: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    background: theme.palette.primary.main,
-    paddingBottom: theme.spacing(5),
-    width: theme.dimensions.sidebarWidth,
-    [theme.breakpoints.down('lg')]: {
-      width: theme.dimensions.sidebarWidthTablet,
-    },
-    [theme.breakpoints.down('sm')]: {
-      width: '0px',
-    },
-  },
-  paper: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flex: 1,
-    boxShadow: '-2px 0px 16px rgba(0, 0, 0, 0.25)',
-    [theme.breakpoints.up('lg')]: {
-      padding: theme.spacing(0, 25, 0, 0),
-    },
-  },
-  form: {
-    maxWidth: theme.spacing(52),
-    padding: theme.spacing(5),
-    width: '100%',
-  },
-}));
+import fundo from '../resources/images/fundo.svg'
 
 const LoginLayout = ({ children }) => {
-  const classes = useStyles();
   const theme = useTheme();
 
   return (
-    <main className={classes.root}>
-      <div className={classes.sidebar}>
-        {!useMediaQuery(theme.breakpoints.down('lg')) && <LogoImage color={theme.palette.secondary.contrastText} />}
+    <main className='flex h-screen bg-gradient-to-br from-blue-600 via-blue-400 to-blue-500 relative overflow-hidden'>
+      <div className="absolute top-1/4 left-1/4 h-96 w-96 bg-white blur-[120px] rounded-full z-0 opacity-60"></div>
+      <div className="absolute bottom-1/4 right-1/4 h-96 w-96 bg-white blur-[120px] rounded-full z-0"></div>
+      <div style={{ backgroundImage: `url(${fundo})`, backgroundSize: 'cover' }} className="flex justify-center items-center pb-20 lg:w-[28%] md:w-[52] sm:w-0">
+      {!useMediaQuery(theme.breakpoints.down('lg')) && <LogoImage color={theme.palette.secondary.contrastText} />}
       </div>
-      <Paper className={classes.paper}>
-        <form className={classes.form}>
+      <div className='flex flex-col justify-center items-center flex-1 shadow-lg shadow-black/25 lg:pr-64 z-10'>
+        <h1 className='text-white text-4xl font-bold mb-6 max-[1200px]:opacity-0'>GPS SECURITY</h1>
+        <form className='bg-zinc-900 bg-opacity-70 p-8 rounded-lg shadow-2xl w-96 max-w-[328px]'>
+          <h1>
+            fdsf
+          </h1>
           {children}
         </form>
-      </Paper>
+      </div>
+      
     </main>
   );
 };

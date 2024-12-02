@@ -26,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 500,
     marginLeft: theme.spacing(1),
     textTransform: 'uppercase',
+    color: "#fff"
   },
 }));
 
@@ -67,14 +68,14 @@ const ResetPasswordPage = () => {
       <div className={classes.container}>
         <div className={classes.header}>
           <IconButton color="primary" onClick={() => navigate('/login')}>
-            <ArrowBackIcon />
+            <ArrowBackIcon className="text-white" />
           </IconButton>
           <Typography className={classes.title} color="primary">
             {t('loginReset')}
           </Typography>
         </div>
         {!token ? (
-          <TextField
+          <input
             required
             type="email"
             label={t('userEmail')}
@@ -82,6 +83,8 @@ const ResetPasswordPage = () => {
             value={email}
             autoComplete="email"
             onChange={(event) => setEmail(event.target.value)}
+            placeholder="seuemail@exemplo.com"
+            className="w-full px-4 py-2 bg-zinc-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-400"
           />
         ) : (
           <TextField
@@ -94,16 +97,17 @@ const ResetPasswordPage = () => {
             onChange={(event) => setPassword(event.target.value)}
           />
         )}
-        <Button
+        <button
           variant="contained"
           color="secondary"
           type="submit"
           onClick={handleSubmit}
           disabled={!/(.+)@(.+)\.(.{2,})/.test(email) && !password}
           fullWidth
+          className="w-full bg-gradient-to-r from-blue-600 to-blue-400 text-white font-bold py-3 rounded-lg hover:from-blue-700 hover:to-blue-500 transition-all"
         >
           {t('loginReset')}
-        </Button>
+        </button>
       </div>
       <Snackbar
         open={snackbarOpen}

@@ -22,12 +22,6 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
   },
-  title: {
-    fontSize: theme.spacing(3),
-    fontWeight: 500,
-    marginLeft: theme.spacing(1),
-    textTransform: 'uppercase',
-  },
 }));
 
 const RegisterPage = () => {
@@ -76,14 +70,14 @@ const RegisterPage = () => {
         <div className={classes.header}>
           {!server.newServer && (
             <IconButton color="primary" onClick={() => navigate('/login')}>
-              <ArrowBackIcon />
+              <ArrowBackIcon className='text-white'/>
             </IconButton>
           )}
-          <Typography className={classes.title} color="primary">
+          <Typography className='text-xl text-white font-medium ml-1 uppercase'>
             {t('loginRegister')}
           </Typography>
         </div>
-        <TextField
+        <input
           required
           label={t('sharedName')}
           name="name"
@@ -91,8 +85,10 @@ const RegisterPage = () => {
           autoComplete="name"
           autoFocus
           onChange={(event) => setName(event.target.value)}
+          placeholder="Nome"
+          className="w-full px-4 py-2 bg-zinc-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-400"
         />
-        <TextField
+        <input
           required
           type="email"
           label={t('userEmail')}
@@ -100,8 +96,10 @@ const RegisterPage = () => {
           value={email}
           autoComplete="email"
           onChange={(event) => setEmail(event.target.value)}
+          placeholder="seuemail@exemplo.com"
+          className="w-full px-4 py-2 bg-zinc-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-400"
         />
-        <TextField
+        <input
           required
           label={t('userPassword')}
           name="password"
@@ -109,6 +107,8 @@ const RegisterPage = () => {
           type="password"
           autoComplete="current-password"
           onChange={(event) => setPassword(event.target.value)}
+          placeholder="********"
+          className="w-full px-4 py-2 bg-zinc-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-400"
         />
         {totpForce && (
           <TextField
@@ -121,16 +121,17 @@ const RegisterPage = () => {
             }}
           />
         )}
-        <Button
+        <button
           variant="contained"
           color="secondary"
           onClick={handleSubmit}
           type="submit"
           disabled={!name || !password || !(server.newServer || /(.+)@(.+)\.(.{2,})/.test(email))}
           fullWidth
+          className="w-full bg-gradient-to-r from-blue-600 to-blue-400 text-white font-bold py-3 rounded-lg hover:from-blue-700 hover:to-blue-500 transition-all"
         >
           {t('loginRegister')}
-        </Button>
+        </button>
       </div>
       <Snackbar
         open={snackbarOpen}
